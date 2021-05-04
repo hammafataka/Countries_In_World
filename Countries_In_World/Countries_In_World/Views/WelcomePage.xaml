@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Countries_In_World.Views.WelcomePage"
+             Title="Countries">
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <Grid RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry
+                    x:Name="userEmailOrPhoneEntry"
+                    Placeholder="Enter your phone Number" 
+                    Keyboard="Numeric"
+                    TextColor="Black"
+                    HeightRequest="50"
+                    />
+                <Label 
+                    Text="select a country" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="1"
+                    />
+                <Button 
+                    Text="Save" 
+                    Grid.Column="1"
+                    TextColor="Black"
+                    CornerRadius="40"
+                    Clicked="Button_Clicked"
+                    />
+                <Picker 
+                    x:Name="CountryPicker"
+                    Title="None"
+                    TitleColor="Black"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    SelectedItem="{Binding SelectedGeoname}"/>
+                <CollectionView ItemsSource="{Binding employees}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedEmployee}"
+                        SelectionChangedCommand="{Binding EmployeeGoToDetailCommand}"
+                        >
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate x:Name="datatt">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="70"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                               Text="Name:"
+                               FontSize="Large"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               />
+                                <Label
+                               Text="{Binding name}"
+                               FontSize="Large"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               TextColor="OrangeRed"
+                               />
+                                <Label
+                               Text="Salary:"
+                               FontSize="Large"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               />
+
+                                <Label
+                         
+                               Text="{Binding salary}"
+                               FontSize="Large"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               TextColor="OrangeRed"
+                               />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

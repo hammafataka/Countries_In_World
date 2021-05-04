@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Countries_In_World.AppShell"
+             xmlns:views="clr-namespace:Countries_In_World.Views">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ThemeColor">#EF3D55</Color>
+            <Color x:Key="GrayColor" >Gray</Color>
+            <Color x:Key="BGcolor">#F0F0F0</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BGcolor}"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource ThemeColor}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource ThemeColor}"/>
+            </Style>
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Countries" >
+            <ShellContent ContentTemplate="{DataTemplate views:WelcomePage}"/>
+        </Tab>
+    </FlyoutItem>
+    
+</Shell>
