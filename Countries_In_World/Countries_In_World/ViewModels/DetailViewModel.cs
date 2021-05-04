@@ -4,6 +4,7 @@ using Countries_In_World.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,14 @@ namespace Countries_In_World.ViewModels
 {
     public class DetailViewModel : BaseViewModel
     {
-        public List<string> countries { get; set; }
 
-        public ObservableCollection<Geoname> CountryOptions { get; }
+        private List<Geoname> countryoptions;
+
+        public List<Geoname> CountryOptions
+        {
+            get { return countryoptions; }
+            set {SetProperty(ref countryoptions , value); }
+        }
         private Geoname selectedGeoname;
         
         public Geoname SelectedGeoname
@@ -29,25 +35,24 @@ namespace Countries_In_World.ViewModels
         public ICommand selectedindex { private set; get; }
         public async Task LoadData()
         {
-            countries = new List<string>();
+
             Isbusy = true;
             CountryOptions.Clear();
-            List<Geoname> localsList = await ApiService.GetCountries();
-           foreach ( Geoname g in localsList)
-            {
-                countries.Add(g.countryName);
-               CountryOptions.Add(g);
-                
-
-            }
-
+            CountryOptions = await ApiService.GetCountries();
             Isbusy = false;
         }
+        private void selectionChanged()
+        {
+
+            SelectedGeoname = CountryOptions.Single(x => x.countryName == SelectedGeoname.countryName);
+        }
+
         public DetailViewModel()
         {
+            CountryOptions = new List<Geoname>();
             SelectedGeoname = new Geoname();
-            CountryOptions = new ObservableCollection<Geoname>();
-            LoadDataCommand = new Command(async () => await LoadData());
+            selectedindex = new Command(() => selectionChanged());
+            Task.Run(async () => await LoadData());
         }
 
     }

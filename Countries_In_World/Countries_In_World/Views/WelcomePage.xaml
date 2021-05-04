@@ -29,6 +29,7 @@
                     Grid.Row="1"
                     />
                 <Button 
+                    x:Name="ButtonSave"
                     Text="Save" 
                     Grid.Column="1"
                     TextColor="Black"
@@ -41,62 +42,38 @@
                     TitleColor="Black"
                     Grid.Row="1"
                     Grid.Column="1"
-                    SelectedItem="{Binding SelectedGeoname}"/>
-                <CollectionView ItemsSource="{Binding employees}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedEmployee}"
-                        SelectionChangedCommand="{Binding EmployeeGoToDetailCommand}"
-                        >
-                    <CollectionView.ItemTemplate >
-                        <DataTemplate x:Name="datatt">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="70"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                    ItemsSource="{Binding CountryOptions}"
+                    ItemDisplayBinding="{Binding countryName}"
+                    SelectedItem="{Binding SelectedGeoname}"
+                    />
 
-                                <Label
-                               Text="Name:"
-                               FontSize="Large"
-                               Grid.Row="0"
-                               Grid.Column="0"
-                               TextColor="Black"
-                               />
-                                <Label
-                               Text="{Binding name}"
-                               FontSize="Large"
-                               Grid.Row="0"
-                               Grid.Column="1"
-                               TextColor="OrangeRed"
-                               />
-                                <Label
-                               Text="Salary:"
-                               FontSize="Large"
-                               Grid.Row="1"
-                               Grid.Column="0"
-                               TextColor="Black"
-                               />
-
-                                <Label
-                         
-                               Text="{Binding salary}"
-                               FontSize="Large"
-                               Grid.Row="1"
-                               Grid.Column="1"
-                               TextColor="OrangeRed"
-                               />
-
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-                </CollectionView>
-
+                <Image 
+                    Source="{Binding SelectedGeoname.FlagUrl}"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"/>
+                <Label 
+                    Text="{Binding  SelectedGeoname.countryName}" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="3"
+                    />
+                <Label 
+                    Text="{Binding  SelectedGeoname.currencyCode}" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="4"
+                    />
+                <Label 
+                    Text="{Binding  SelectedGeoname.continentName}" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="5"
+                    />
             </Grid>
+
+
+       
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
