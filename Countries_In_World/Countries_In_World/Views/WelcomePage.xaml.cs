@@ -20,7 +20,7 @@ namespace Countries_In_World.Views
         public  WelcomePage()
         {
             InitializeComponent();
-            vm = new DetailViewModel(CountryPicker);
+            vm = new DetailViewModel();
             BindingContext = vm;
 
 
@@ -44,16 +44,13 @@ namespace Countries_In_World.Views
         {
             return Regex.Match(number, @"([0-9]{9})$").Success;
         }
-        protected async override void OnAppearing()
+        private void CountryPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            base.OnAppearing();
-
+           vm.SelectedGeoname.FlagUrl =$"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/{vm.SelectedGeoname.countryCode.ToLower()}.png";
+           flagimage.Source = vm.SelectedGeoname.FlagUrl;
+            if (vm.SelectedGeoname.continentName.ToLower() == "europe")
+                this.BackgroundColor = Color.FromHex("#FCF4A3");
+          
         }
-
-        private async void CountryPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            await Task.Run(() => vm.selectedindex.Execute(null));
-        }
-      
     }
 }

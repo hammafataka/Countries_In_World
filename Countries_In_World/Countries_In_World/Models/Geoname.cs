@@ -24,5 +24,6 @@ namespace Countries_In_World.Models
         public string postalCodeFormat { get; set; }
         public string continentName { get; set; }
         public string currencyCode { get; set; }
+        public string FlagUrl { get; set; }
     }
 }

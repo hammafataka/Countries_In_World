@@ -7,12 +7,12 @@
         <StackLayout Padding="15">
             <Grid RowSpacing="20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Entry
@@ -45,28 +45,57 @@
                     ItemsSource="{Binding CountryOptions}"
                     ItemDisplayBinding="{Binding countryName}"
                     SelectedItem="{Binding SelectedGeoname}"
+                    SelectedIndexChanged="CountryPicker_SelectedIndexChanged"
                     />
 
                 <Image 
+                    x:Name="flagimage"
                     Source="{Binding SelectedGeoname.FlagUrl}"
                     Grid.Row="2"
-                    Grid.ColumnSpan="2"/>
+                    Grid.Column="0"
+                    WidthRequest="250" 
+                    HeightRequest="200"
+                    Grid.ColumnSpan="2"
+                    Aspect="AspectFit"
+                    />
                 <Label 
                     Text="{Binding  SelectedGeoname.countryName}" 
+                    TextColor="OrangeRed"
+                    FontSize="Large"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    />
+                <Label 
+                    Text="Country Name:" 
                     TextColor="Black"
                     FontSize="Large"
                     Grid.Row="3"
                     />
                 <Label 
-                    Text="{Binding  SelectedGeoname.currencyCode}" 
+                    Text="Currency:" 
                     TextColor="Black"
                     FontSize="Large"
                     Grid.Row="4"
+                    
+                    />
+                <Label 
+                    Text="{Binding  SelectedGeoname.currencyCode}" 
+                    TextColor="OrangeRed"
+                    FontSize="Large"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    />
+                <Label 
+                    Text="Countient:" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="5"
                     />
                 <Label 
                     Text="{Binding  SelectedGeoname.continentName}" 
-                    TextColor="Black"
+                    TextColor="OrangeRed"
                     FontSize="Large"
+                    Grid.Column="1"
                     Grid.Row="5"
                     />
             </Grid>
