@@ -2,7 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Countries_In_World.Views.WelcomePage"
-             Title="Countries">
+             xmlns:behaviors="clr-namespace:Countries_In_World.Behavior"
+             xmlns:Convertors="clr-namespace:Countries_In_World.Convertors"
+             xmlns:bind="clr-namespace:Countries_In_World.ViewModels"
+             Title="Countries"
+             BackgroundColor="{Binding SelectedGeoname.continentName,Converter={StaticResource backGroundConvertors}}"
+             >
+
+    <ContentPage.Resources>
+        <Convertors:ContinentColors x:Key="backGroundConvertors"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <bind:DetailViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Padding="15">
             <Grid RowSpacing="20">
@@ -21,20 +33,17 @@
                     Keyboard="Numeric"
                     TextColor="Black"
                     HeightRequest="50"
-                    />
+                    Grid.ColumnSpan="2">
+                    <Entry.Behaviors>
+                        <behaviors:DataValidationBehavior/>
+                    </Entry.Behaviors>
+
+                </Entry>
                 <Label 
                     Text="select a country" 
                     TextColor="Black"
                     FontSize="Large"
                     Grid.Row="1"
-                    />
-                <Button 
-                    x:Name="ButtonSave"
-                    Text="Save" 
-                    Grid.Column="1"
-                    TextColor="Black"
-                    CornerRadius="40"
-                    Clicked="Button_Clicked"
                     />
                 <Picker 
                     x:Name="CountryPicker"
@@ -45,7 +54,6 @@
                     ItemsSource="{Binding CountryOptions}"
                     ItemDisplayBinding="{Binding countryName}"
                     SelectedItem="{Binding SelectedGeoname}"
-                    SelectedIndexChanged="CountryPicker_SelectedIndexChanged"
                     />
 
                 <Image 
@@ -57,6 +65,7 @@
                     HeightRequest="200"
                     Grid.ColumnSpan="2"
                     Aspect="AspectFit"
+                    
                     />
                 <Label 
                     Text="{Binding  SelectedGeoname.countryName}" 
@@ -99,10 +108,6 @@
                     Grid.Row="5"
                     />
             </Grid>
-
-
-       
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

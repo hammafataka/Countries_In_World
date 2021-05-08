@@ -32,13 +32,13 @@ namespace Countries_In_World.ViewModels
             set { SetProperty(ref selectedGeoname, value); }
         }
         public ICommand LoadDataCommand { private set; get; }
+        public ICommand selectionChangedCommand { private set; get; }
         public async Task LoadData()
         {
 
             Isbusy = true;
             CountryOptions.Clear();
             CountryOptions = await ApiService.GetCountries();
-            SelectedGeoname.FlagUrl =$"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/{selectedGeoname.countryCode.ToLower()}.png";
             Isbusy = false;
         }
         public DetailViewModel()
@@ -46,6 +46,7 @@ namespace Countries_In_World.ViewModels
             CountryOptions = new List<Geoname>();
             SelectedGeoname = new Geoname();
             Task.Run(async () => await LoadData());
+            
         }
 
     }

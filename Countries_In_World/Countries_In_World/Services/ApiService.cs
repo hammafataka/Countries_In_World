@@ -25,6 +25,10 @@ namespace Countries_In_World.Services
                 {
                     string json = await response.Content.ReadAsStringAsync();
                     Root info = JsonConvert.DeserializeObject<Root>(json);
+                    foreach(Geoname geoname in info.geonames)
+                    {
+                        geoname.FlagUrl = $"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/{geoname.countryCode.ToLower()}.png";
+                    }
                     return info.geonames;
                 }
 

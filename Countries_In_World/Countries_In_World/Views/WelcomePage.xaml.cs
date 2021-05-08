@@ -44,13 +44,5 @@ namespace Countries_In_World.Views
         {
             return Regex.Match(number, @"([0-9]{9})$").Success;
         }
-        private void CountryPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           vm.SelectedGeoname.FlagUrl =$"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/{vm.SelectedGeoname.countryCode.ToLower()}.png";
-           flagimage.Source = vm.SelectedGeoname.FlagUrl;
-            if (vm.SelectedGeoname.continentName.ToLower() == "europe")
-                this.BackgroundColor = Color.FromHex("#FCF4A3");
-          
-        }
     }
 }
