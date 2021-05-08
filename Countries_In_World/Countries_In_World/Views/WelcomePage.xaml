@@ -6,15 +6,16 @@
              xmlns:Convertors="clr-namespace:Countries_In_World.Convertors"
              xmlns:bind="clr-namespace:Countries_In_World.ViewModels"
              Title="Countries"
-             BackgroundColor="{Binding SelectedGeoname.continentName,Converter={StaticResource backGroundConvertors}}"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              >
-
+    <!-- BackgroundColor="{Binding SelectedGeoname.continentName,Converter={StaticResource backGroundConvertors}}"-->
     <ContentPage.Resources>
         <Convertors:ContinentColors x:Key="backGroundConvertors"/>
     </ContentPage.Resources>
     <ContentPage.BindingContext>
         <bind:DetailViewModel/>
     </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout Padding="15">
             <Grid RowSpacing="20">
@@ -65,7 +66,7 @@
                     HeightRequest="200"
                     Grid.ColumnSpan="2"
                     Aspect="AspectFit"
-                    
+                    xct:TouchEffect.LongPressCommand="{Binding TouchedCommand}"
                     />
                 <Label 
                     Text="{Binding  SelectedGeoname.countryName}" 
@@ -95,7 +96,7 @@
                     Grid.Column="1"
                     />
                 <Label 
-                    Text="Countient:" 
+                    Text="Contient:" 
                     TextColor="Black"
                     FontSize="Large"
                     Grid.Row="5"
@@ -107,6 +108,24 @@
                     Grid.Column="1"
                     Grid.Row="5"
                     />
+                <Label 
+                    Text="{Binding Score}" 
+                    TextColor="Black"
+                    FontSize="Large"
+                    Grid.Row="6"
+                    IsEnabled="True"
+                    xct:TouchEffect.LongPressCommand="{Binding LabelTouchedCommand}"
+                    >
+                    <Label.Triggers>
+                        <Trigger 
+                            TargetType="Label"
+                            Property="IsEnabled"
+                            Value="true">
+                            <Setter Property="IsVisible" Value="true"/>
+                        </Trigger>
+                    </Label.Triggers>
+                </Label>
+                    
             </Grid>
         </StackLayout>
     </ContentPage.Content>
